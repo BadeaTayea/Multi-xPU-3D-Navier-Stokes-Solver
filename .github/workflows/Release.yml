@@ -1,0 +1,26 @@
+name: Enforce Release Tags
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Validate tag format
+      run: |
+        if [[ ! $GITHUB_REF =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+          echo "Invalid tag format: $GITHUB_REF"
+          exit 1
+        fi
+        echo "Tag format validated: $GITHUB_REF"
+
+    - name: Process valid tag
+      run: echo "Processing release for tag ${{ github.ref_name }}"
+
+# ![Release Tag Workflow](https://github.com/<username>/<repository>/actions/workflows/release.yml/badge.svg)
