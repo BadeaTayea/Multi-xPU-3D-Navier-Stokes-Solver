@@ -1,6 +1,4 @@
 # Multi-xPU-3D-Navier-Stokes-Solver
-3D Navier-Stokes solver using Chorin's projection method and advection based on the method of characteristics.
-
 
 [![Run tests](https://github.com/BadeaTayea/Multi-xPU-3D-Navier-Stokes-Solver/actions/workflows/CI.yml/badge.svg)](https://github.com/BadeaTayea/Multi-xPU-3D-Navier-Stokes-Solver/actions/workflows/CI.yml)
 
