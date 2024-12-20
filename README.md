@@ -126,27 +126,66 @@ julia> include("NavierStokes_3D_Viz.jl")
 ### xPU Implementation 
 ### Multi-xPU Implementation
 
-## Visualizations: Cross Sections and Animations 
-### Evolution in 2D for Pressure Field, Velocity, and Vorticity Evolution
+## Visualization: Velocity, Vorticity, and Pressure Fields
 
-#### Velocity Field
-![2D Velocity Animation](docs/2D_Velocity_Animation.gif)
+### Cross Sectional Evolution in 2D 
 
-#### Vorticity Field
-![2D Vorticity Animation](docs/2D_Vorticity_Animation.gif)
+<table>
+  <tr>
+    <td align="center">
+      <strong>Velocity Field</strong><br>
+      <img src="docs/2D_Velocity_Animation.gif" alt="2D Velocity Animation" width="300">
+    </td>
+    <td align="center">
+      <strong>Vorticity Field</strong><br>
+      <img src="docs/2D_Vorticity_Animation.gif" alt="2D Vorticity Animation" width="300">
+    </td>
+    <td align="center">
+      <strong>Pressure Field</strong><br>
+      <img src="docs/2D_Pressure_Animation.gif" alt="2D Pressure Animation" width="300">
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <strong>Fig. 1:</strong> 2D Velocity Field - Evolution of velocity magnitude.
+    </td>
+    <td align="center">
+      <strong>Fig. 2:</strong> 2D Vorticity Field - Evolution of rotational flow.
+    </td>
+    <td align="center">
+      <strong>Fig. 3:</strong> 2D Pressure Field - Evolution of pressure distribution.
+    </td>
+  </tr>
+</table>
 
-#### Pressure Field
-![2D Pressure Animation](docs/2D_Pressure_Animation.gif)
+### Evolution in 3D 
 
-
-### Evolution in 3D for Pressure Field, Velocity, and Vorticity Evolution
-#### Velocity Field
-![3D Velocity Animation](docs/3D_Velocity_Animation.gif)
-
-#### Vorticity Field
-![3D Vorticity Animation](docs/3D_Vorticity_Animation.gif)
-
-#### Pressure Field
-![3D Pressure Animation](docs/3D_Pressure_Animation.gif)
+<table>
+  <tr>
+    <td align="center">
+      <strong>Velocity Field</strong><br>
+      <img src="docs/3D_Velocity_Animation.gif" alt="3D Velocity Animation" width="300">
+    </td>
+    <td align="center">
+      <strong>Vorticity Field</strong><br>
+      <img src="docs/3D_Vorticity_Animation.gif" alt="3D Vorticity Animation" width="300">
+    </td>
+    <td align="center">
+      <strong>Pressure Field</strong><br>
+      <img src="docs/3D_Pressure_Animation.gif" alt="3D Pressure Animation" width="300">
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <strong>Fig. 4:</strong> 3D Velocity Field - Evolution of velocity magnitude.
+    </td>
+    <td align="center">
+      <strong>Fig. 5:</strong> 3D Vorticity Field - Evolution of rotational flow structures.
+    </td>
+    <td align="center">
+      <strong>Fig. 6:</strong> 3D Pressure Field - Evolution of pressure distribution in 3D.
+    </td>
+  </tr>
+</table>
 
 ## Resources
