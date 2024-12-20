@@ -63,7 +63,7 @@ julia> Pkg.activate()
   Pkg.add("GLMakie")
   ```
   
-5. Run the script relying on GLMakie (e.g. `NavierStokes_3D_Viz.jl` in `./scripts/visualization`):
+5. Run the script relying on GLMakie (e.g. `./scripts/visualization/NavierStokes_3D_Viz.jl`):
 ```julia
 julia> include("NavierStokes_3D_Viz.jl")
 ```
