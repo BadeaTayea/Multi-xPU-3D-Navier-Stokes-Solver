@@ -112,19 +112,195 @@ julia> Pkg.instantiate()
 julia> include("NavierStokes_3D_Viz.jl")
 ```
 
-
-
-
-
 ## Physical Problem 
+
 ### Governing System of Partial Differential Equations (PDEs)
+
+The flow of an incompressible fluid around a spherical obstacle is governed by the Navier-Stokes equations, which describe the conservation of momentum and enforce incompressibility:
+
+$$
+\rho \left( \frac{\partial \mathbf{V}}{\partial t} + (\mathbf{V} \cdot \nabla) \mathbf{V} \right) = -\nabla p + \mu \nabla^2 \mathbf{V},
+$$
+
+$$
+\nabla \cdot \mathbf{V} = 0,
+$$
+
+where:
+- $\mathbf{V} = [u, v, w]^T$ is the velocity vector field in the $x$, $y$, and $z$ directions,
+- $p$ is the pressure field,
+- $\rho$ is the fluid density,
+- $\mu$ is the dynamic viscosity.
+
+The velocity field $\mathbf{V}$ must satisfy a variety of physical constraints. At the sphere's surface, the velocity is set to zero, enforcing the no-slip condition and ensuring that fluid adheres to the obstacle. Away from the sphere, the velocity evolves dynamically according to the Navier-Stokes equations. The inlet velocity is imposed with a parabolic profile, setting the initial conditions for flow entering the domain. This profile aligns with the assumption of laminar inflow and ensures smooth flow entry.
+
+Pressure $p$, on the other hand, plays a crucial role in maintaining the incompressibility condition, $\nabla \cdot \mathbf{V} = 0$. The pressure field acts as a correction mechanism, dynamically adjusting to counteract any divergence in the velocity field. This adjustment is achieved by solving the pressure Poisson equation:
+
+$$
+\nabla^2 p = \frac{\rho}{\Delta t} \nabla \cdot \mathbf{V},
+$$
+
+where $\Delta t$ is the simulation time step.
+
+The flow characteristics are largely determined by the Reynolds number, a dimensionless parameter defined as:
+
+$$
+Re = \frac{\rho V_{in} L}{\mu},
+$$
+
+Here, $V_{in}$ represents the characteristic inlet velocity, and $L$ is the characteristic length (domain size or obstacle diameter). For $Re = 10^6$, the flow regime is dominated by inertial forces, with viscous effects localized near the obstacle's boundary.
+
+Rotational aspects of the flow are characterized by the vorticity field, which can be derived from the velocity field as the curl:
+
+$$
+\boldsymbol{\omega} = \nabla \times \mathbf{V},
+$$
+
+with components:
+
+$$
+\omega_x = \frac{\partial w}{\partial y} - \frac{\partial v}{\partial z}, \quad \omega_y = \frac{\partial u}{\partial z} - \frac{\partial w}{\partial x}, \quad \omega_z = \frac{\partial v}{\partial x} - \frac{\partial u}{\partial y}.
+$$
+
+The magnitude of vorticity is expressed as:
+
+$$
+|\omega| = \sqrt{\omega_x^2 + \omega_y^2 + \omega_z^2}.
+$$
+
+The vorticity magnitude is essential for visualizing and analyzing vortex structures, such as those formed in the wake of the sphere.
+
+
 ### Boundary Conditions
 
-## Numerical Methods
+Boundary conditions define the flow behavior at the domain boundaries and the surface of the sphere. At the sphere's surface, the no-slip condition is enforced:
+
+$$
+\mathbf{V} = 0, \quad \forall \mathbf{x} \, \text{s.t.} \, \frac{(x - x_s)^2}{r^2} + \frac{(y - y_s)^2}{r^2} + \frac{(z - z_s)^2}{r^2} \leq 1,
+$$
+
+where $(x_s, y_s, z_s)$ is the sphere's center, and $r$ is its radius. This ensures that the fluid adheres to the sphere's surface, creating shear layers and wake dynamics.
+
+At the inlet boundary ($z = 0$), a parabolic velocity profile is imposed for $w$:
+
+$$
+w(x, y, z=0) = 4 V_{in} \frac{x}{L_x} \left(1 - \frac{x}{L_x} \right) \frac{y}{L_y} \left(1 - \frac{y}{L_y} \right),
+$$
+
+where $L_x$ and $L_y$ are the domain dimensions in the $x$ and $y$ directions. This smooth inflow profile simulates laminar flow entering the domain.
+
+At the outlet boundary ($z = L_z$), a zero-gradient Neumann condition is applied to pressure:
+
+$$
+\frac{\partial p}{\partial z} = 0,
+$$
+
+allowing the flow to exit without resistance. On the side walls, free-slip boundary conditions are applied to minimize interactions with the domain boundaries. For the tangential components, these conditions ensure:
+
+$$
+\frac{\partial u}{\partial y} = 0, \, v = 0, \, \frac{\partial w}{\partial x} = 0,
+$$
+
+on the YZ plane, and similarly for the XZ plane. These conditions prevent the generation of artificial shear forces along the walls.
+
+
+
+
+
+## Numerical Methods and Implementation
+The numerical solution of the incompressible Navier-Stokes equations is performed using Chorin's projection method, an operator-splitting approach. This method separates the velocity update into components corresponding to the physical terms in the equations—viscous, gravitational, convective, and pressure-driven effects. The code integrates multiple numerical strategies, including explicit Euler time-stepping, semi-Lagrangian advection, and a pseudo-transient pressure solver, to ensure efficient and stable computations.
+
+#### Intermediate Velocity Update
+
+The intermediate velocity $\mathbf{V}^*$ is calculated by incorporating viscous and gravitational forces using explicit Euler time-stepping:
+
+$$
+\frac{\mathbf{V}^* - \mathbf{V}^n}{\Delta t} = \mu \nabla^2 \mathbf{V}^n - \rho \mathbf{g},
+$$
+
+where $\mathbf{g}$ is the gravitational acceleration. This update is implemented in the `predict_V!` function, which updates the velocity components `Vx`, `Vy`, and `Vz` in place. The function utilizes stress tensor components (`τxx`, `τyy`, `τzz`, etc.), computed in `update_τ!`, to represent the viscous forces. These components are calculated using finite-difference operators (`@d_xa`, `@d_ya`, `@d_za`) over the velocity arrays, and the gravitational term is added explicitly.
+
+##### Convective Term and Semi-Lagrangian Advection
+
+The convective term, accounting for momentum transport due to the flow, is handled using a semi-Lagrangian approach. This method tracks fluid parcels backward in time along streamlines and interpolates their values. The backtracking step is described by:
+
+$$
+\mathbf{X}_{\text{backtracked}} = \mathbf{X} - \mathbf{V} \Delta t,
+$$
+
+where $\mathbf{X}_{\text{backtracked}}$ is the estimated position of a parcel. The `advect!` function performs this operation on the velocity fields using the `backtrack!` function, which calculates source positions and interpolates values using the `lerp` function. For example, `Vx`, `Vy`, and `Vz` are updated by iterating over all grid points and applying this interpolation.
+
+##### Pressure Correction and Velocity Divergence-Free Constraint
+
+To ensure incompressibility, the velocity field is corrected using the pressure gradient:
+
+$$
+\frac{\mathbf{V}^{n+1} - \mathbf{V}^*}{\Delta t} = -\frac{1}{\rho} \nabla p^{n+1}.
+$$
+
+The correction step is implemented in the `correct_V!` function, which updates the velocity fields `Vx`, `Vy`, and `Vz` using finite-difference operators (`@d_xi`, `@d_yi`, `@d_zi`) applied to the pressure array `Pr`. The pressure gradient enforces the divergence-free condition, ensuring mass conservation.
+
+The pressure at iteration $(n+1)$ is obtained by solving the Poisson equation:
+
+$$
+\nabla^2 p^{n+1} = \frac{\rho}{\Delta t} \nabla \cdot \mathbf{V}^*.
+$$
+
+This equation is solved iteratively using a pseudo-transient approach. The divergence of the velocity field is first calculated in `update_∇V!`, and the pseudo-time derivative of pressure is computed in `update_dPrdτ!`. The pressure is then updated in `update_Pr!` until convergence.
+
+##### Boundary Conditions
+
+Boundary conditions are enforced for both velocity and pressure fields at each timestep. The function `set_bc_Vel!` applies boundary conditions for `Vx`, `Vy`, and `Vz`. For example:
+- The inlet boundary (`z = 0`) is set with a parabolic velocity profile stored in `Vprof`:
+  $$ 
+  w(x, y, z = 0) = 4 V_{in} \frac{x}{L_x} \left(1 - \frac{x}{L_x} \right) \frac{y}{L_y} \left(1 - \frac{y}{L_y} \right),
+  $$
+  implemented via `bc_zV!`.
+- No-slip conditions at the sphere surface are applied in `set_sphere_multixpu!`, which zeroes the velocity components `Vx`, `Vy`, and `Vz` inside and on the surface of the sphere.
+- Free-slip boundary conditions for velocity and zero-gradient Neumann conditions for pressure are enforced on side walls using functions like `bc_xz!`, `bc_yz!`, and `bc_xy!`.
+
+Pressure boundary conditions are imposed via `set_bc_Pr!`. For instance, a Dirichlet condition sets `Pr = 0` at the outlet, while zero-gradient Neumann conditions are applied elsewhere.
+
+##### Stability and Numerical Resolution
+
+Stability is maintained by constraining the timestep $\Delta t$ based on viscous and advective criteria:
+
+$$
+\Delta t = \min \left( \frac{\rho \Delta z^2}{\mu}, \frac{\Delta z}{V_{in}} \right),
+$$
+
+where $\Delta z$ is the grid spacing. This ensures accurate resolution of both small-scale viscous interactions and large-scale advection dynamics. 
+
+##### Additional Numerical Considerations
+
+- **Halo Updates**: Functions such as `update_halo!` manage data communication between grid partitions, ensuring boundary values are updated in multi-node setups.
+- **Visualization**: Arrays for velocity (`Vx_v`, `Vy_v`, `Vz_v`) and pressure (`Pr_v`) are gathered and saved periodically for post-processing.
+- **Divergence Computation**: The function `update_∇V!` computes the velocity divergence `∇V`, which is critical for pressure correction and diagnosing flow incompressibility.
+
+
+
+
+
 
 ## xPU Computing
 ### xPU Implementation 
 ### Multi-xPU Implementation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Visualization: Velocity, Vorticity, and Pressure Fields
 
