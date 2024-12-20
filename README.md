@@ -8,9 +8,6 @@
 
 ![Release Workflow](https://github.com/BadeaTayea/Multi-xPU-3D-Navier-Stokes-Solver/actions/workflows/Release.yml/badge.svg)
 
-BADGE 2
-BADGE 3
-
 ## Repository Guide
 
 
