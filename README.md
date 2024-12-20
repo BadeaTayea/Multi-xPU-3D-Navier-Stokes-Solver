@@ -128,6 +128,23 @@ julia> include("NavierStokes_3D_Viz.jl")
 
 ## Visualizations: Cross Sections and Animations 
 ### Evolution in 2D for Pressure Field, Velocity, and Vorticity Evolution
+#### Velocity Field
+![2D Velocity Animation](docs/2D_Velocity_Animation.gif)
+
+#### Pressure Field
+![2D Pressure Animation](docs/2D_Pressure_Animation.gif)
+
+#### Vorticity Field
+![2D Vorticity Animation](docs/2D_Vorticity_Animation.gif)
+
 ### Evolution in 3D for Pressure Field, Velocity, and Vorticity Evolution
+#### Velocity Field
+![3D Velocity Animation](docs/3D_Velocity_Animation.gif)
+
+#### Pressure Field
+![3D Pressure Animation](docs/3D_Pressure_Animation.gif)
+
+#### Vorticity Field
+![3D Vorticity Animation](docs/3D_Vorticity_Animation.gif)
 
 ## Resources
