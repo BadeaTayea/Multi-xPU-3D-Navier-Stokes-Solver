@@ -56,6 +56,7 @@ class203 12856  0.0  0.0 2389004 43516 pts/0   Sl   10:00   0:00 Xvfb :1 -screen
 ```julia
 julia> using Pkg
 julia> Pkg.activate()
+julia> Pkg.instantiate()
 ```
 
 4. Re-install the GLMakie package within the environment:
