@@ -10,6 +10,47 @@
 
 ## Repository Guide
 
+```bash
+.
+├── deps
+│   └── build.jl
+├── docs
+│   ├── 2D_Pressure_Animation.gif
+│   ├── 2D_Velocity_Animation.gif
+│   ├── 2D_Vorticity_Animation.gif
+│   ├── 3D_Pressure_Animation.gif
+│   ├── 3D_Velocity_Animation.gif
+│   ├── 3D_Vorticity_Animation.gif
+│   └── md
+│       └── Literate.md
+├── Project.toml
+├── README.md
+├── scripts
+│   ├── Literate.jl
+│   ├── NavierStokes3D_multixpu.jl
+│   ├── NavierStokes3D_xpu.jl
+│   ├── Project.toml
+│   ├── run_multixpu.sh
+│   ├── run_xpu.sh
+│   └── visualization
+│       ├── NavierStokes_2D_Viz.jl
+│       └── NavierStokes_3D_Viz.jl
+└── test
+    ├── NavierStokes3D_multixpu_testing.jl
+    ├── out
+    │   ├── A_out.bin
+    │   ├── out_Pr_10.bin
+    │   ├── out_Vx_10.bin
+    │   ├── out_Vy_10.bin
+    │   └── out_Vz_10.bin
+    ├── out_ground_truth
+    │   ├── out_Pr_10.bin
+    │   ├── out_Vx_10.bin
+    │   ├── out_Vy_10.bin
+    │   └── out_Vz_10.bin
+    ├── Project.toml
+    └── runtests.jl
+```
 
 ## Setups
 All computations for this project were conducted on the supercomputer **Piz Daint** at CSCS. Piz Daint comprises approximately 5,700 compute nodes, each equipped with an Nvidia P100 GPU (16GB PCIe). To ensure a seamless workflow for computation and visualization, a few preparatory measures were implemented. Details are outlined below:
