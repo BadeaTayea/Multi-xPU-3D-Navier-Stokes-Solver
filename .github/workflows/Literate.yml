@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          ref: ${{ github.ref_name }}
+          # ref: ${{ github.ref_name }}
 
       # Step 2: Set up Julia
       - name: Set up Julia
