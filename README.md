@@ -299,3 +299,9 @@ The multi-xPU implementation partitions the computational domain across multiple
 </table>
 
 ## Resources
+- [NavierStokes.jl](https://github.com/utkinis/NavierStokes.jl)
+- [Solving the incompressible
+Navier-Stokes equations in 3-D
+to model gas flow in a room](https://uu.diva-portal.org/smash/get/diva2:1843814/FULLTEXT01.pdf)
+- [NASA - Navier Stokes Equations in 3D](https://www.grc.nasa.gov/www/k-12/airplane/nseqs.html)
+
