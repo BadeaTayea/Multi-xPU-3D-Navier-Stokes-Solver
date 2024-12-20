@@ -130,9 +130,24 @@ This will generate output inside a new written directory `./scripts/navier_stoke
 ```julia
 julia> include("NavierStokes_2D_Viz.jl")
 ```
+This will generate 2D frames and a corresponding animation for the evolution of velocity, vorticity, and pressure. 
 
+-
 
+To launch the simulation on multiple xPU's:
 
+1. Run the batch script `./scripts/run_multixpu.sh`
+```bash
+sbatch run_multixpu.sh
+```
+This will generate output inside a new written directory `./scripts/navier_stokes_3d_multixpu_sphere_outputs`.
+
+2. To visualize the results, run `./scripts/visualization/NavierStokes_3D_Viz.jl`:
+```julia
+julia> include("NavierStokes_3D_Viz.jl")
+```
+For this step, make sure to follow the instructions under the "Visualization Setup" section.
+This will generate 3D frames and a corresponding animation for the evolution of velocity, vorticity, and pressure. 
 
 
 ## Physical Problem 
