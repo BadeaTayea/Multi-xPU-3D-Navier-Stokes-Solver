@@ -1,4 +1,4 @@
-name: Running Literate.yml
+name: Generate Documentation
 
 on:
   push:
@@ -14,15 +14,15 @@ jobs:
   literate:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: write  
 
     steps:
       # Step 1: Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0   
-          ref: ${{ github.ref_name }} 
+          fetch-depth: 0
+          ref: ${{ github.ref_name }}
 
       # Step 2: Set up Julia
       - name: Set up Julia
@@ -45,16 +45,20 @@ jobs:
       # Step 6: Ensure docs/md directory exists
       - name: Ensure docs/md directory exists
         run: mkdir -p docs/md
-        
+
       # Step 7: Run Literate.jl
       - name: Run Literate.jl
         run: julia --project=. -e 'using Literate; Literate.markdown("scripts/Literate.jl", "docs/md", documenter=false)'
 
-      # Step 8: Commit and push generated files
+      # Step 8: Debug generated files
+      - name: Debug generated files
+        run: ls -R docs/md
+
+      # Step 9: Commit and push documentation
       - name: Commit and push documentation
         run: |
           git config --global user.name "GitHub Actions Bot"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add docs/md/*
-          git diff --quiet || git commit -m "Generate Markdown documentation from Literate.jl"
+          git commit -m "Generate Markdown documentation from Literate.jl" || echo "No changes to commit"
           git push
