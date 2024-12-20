@@ -128,7 +128,7 @@ julia> include("NavierStokes_3D_Viz.jl")
 
 ## Visualization: Velocity, Vorticity, and Pressure Fields
 
-### Cross Sectional Evolution in 2D 
+### Cross-Sectional Evolution in 2D 
 
 <table>
   <tr>
