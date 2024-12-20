@@ -46,24 +46,24 @@ $ Xvfb :1 -screen 0 1024x768x24 &
 $ export DISPLAY=:1
 ```
 
-2. We confirmed that Xvfb was running using:
+2. Confirm that Xvfb is running using:
 ```bash
 $ ps aux | grep Xvfb
 class203 12856  0.0  0.0 2389004 43516 pts/0   Sl   10:00   0:00 Xvfb :1 -screen 0 1024x768x24
 ```
 
-3. We then entered julia REPL and activated a local project:
+3. Enter julia REPL and activate a local project:
 ```julia
 julia> using Pkg
 julia> Pkg.activate()
 ```
 
-4. We then re-installed the GLMakie package within the environment:
+4. Re-install the GLMakie package within the environment:
   ```julia
   Pkg.add("GLMakie")
   ```
   
-5. We then ran the script (e.g. `NavierStokes_3D_Viz.jl` in `./scripts/visualization`):
+5. Run the script relying on GLMakie (e.g. `NavierStokes_3D_Viz.jl` in `./scripts/visualization`):
 ```
 julia> include("NavierStokes_3D_Viz.jl")
 ```
