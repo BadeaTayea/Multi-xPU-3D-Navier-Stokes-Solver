@@ -42,11 +42,15 @@ jobs:
       - name: Install Literate explicitly
         run: julia --project=. -e 'import Pkg; Pkg.add("Literate")'
 
-      # Step 6: Run Literate.jl
+      # Step 6: Ensure docs/md directory exists
+      - name: Ensure docs/md directory exists
+        run: mkdir -p docs/md
+        
+      # Step 7: Run Literate.jl
       - name: Run Literate.jl
         run: julia --project=. -e 'using Literate; Literate.markdown("scripts/Literate.jl", "docs/md", documenter=false)'
 
-      # Step 7: Commit and push generated files
+      # Step 8: Commit and push generated files
       - name: Commit and push documentation
         run: |
           git config --global user.name "GitHub Actions Bot"
