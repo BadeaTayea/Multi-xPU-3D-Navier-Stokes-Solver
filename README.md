@@ -132,7 +132,7 @@ julia> include("NavierStokes_2D_Viz.jl")
 ```
 This will generate 2D frames and a corresponding animation for the evolution of velocity, vorticity, and pressure. 
 
--
+---
 
 To launch the simulation on multiple xPU's:
 
