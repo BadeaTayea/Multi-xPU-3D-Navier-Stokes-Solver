@@ -59,7 +59,7 @@ All computations for this project were conducted on the supercomputer **Piz Dain
 ### Computational Setup
 To run Julia interactively on Piz Daint, the following steps were followed:
 
-1. Access Daint using the termina
+1. Access Daint using the terminal:
 ```bash
 $ ssh daint-xc
 ```
@@ -112,6 +112,28 @@ julia> Pkg.instantiate()
 ```julia
 julia> include("NavierStokes_3D_Viz.jl")
 ```
+
+
+
+
+### Running Instructions:
+
+To launch the simulation on a single xPU:
+
+1. Run the batch script `./scripts/run_xpu.sh`
+```bash
+sbatch run_xpu.sh
+```
+This will generate output inside a new written directory `./scripts/navier_stokes_3d_xpu_sphere_outputs`.
+
+2. To visualize the results, run `./scripts/visualization/NavierStokes_2D_Viz.jl`:
+```julia
+julia> include("NavierStokes_2D_Viz.jl")
+```
+
+
+
+
 
 ## Physical Problem 
 
