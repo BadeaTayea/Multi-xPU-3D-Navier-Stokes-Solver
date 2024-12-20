@@ -4,8 +4,7 @@
 
 [![Running Literate.yml](https://github.com/BadeaTayea/Multi-xPU-3D-Navier-Stokes-Solver/actions/workflows/Literate.yml/badge.svg)](https://github.com/BadeaTayea/Multi-xPU-3D-Navier-Stokes-Solver/actions/workflows/Literate.yml)
 
-![Release Workflow](https://github.com/BadeaTayea/Multi-xPU-3D-Navier-Stokes-Solver/actions/workflows/Release.yml/badge.svg)
-
+[![Enforce Release Tags](https://github.com/BadeaTayea/Multi-xPU-3D-Navier-Stokes-Solver/actions/workflows/Release.yml/badge.svg)](https://github.com/BadeaTayea/Multi-xPU-3D-Navier-Stokes-Solver/actions/workflows/Release.yml)
 
 
 ## Repository Guide
@@ -112,8 +111,6 @@ julia> Pkg.instantiate()
 ```julia
 julia> include("NavierStokes_3D_Viz.jl")
 ```
-
-
 
 
 ### Running Instructions:
@@ -257,20 +254,6 @@ The single-xPU implementation runs entirely on a single GPU or a multi-threaded 
 ### Multi-xPU Implementation
 
 The multi-xPU implementation partitions the computational domain across multiple xPUs using `ImplicitGlobalGrid`. Each xPU operates on its assigned subdomain, with arrays such as `Vx`, `Vy`, `Vz`, and `Pr` distributed across all processes. Communication between subdomains is handled explicitly using halo updates (`update_halo!`), ensuring continuity at subdomain boundaries. Specific operations, such as enforcing the no-slip boundary condition for the sphere (`set_sphere_multixpu!`), account for the distributed nature of the domain by referencing global coordinates. Functions like `max_g` aggregate data globally, ensuring that results such as residual errors or boundary conditions are synchronized across all processes. `MPI` is used to enable scalability, allowing large domains to be solved efficiently by distributing both the computation and memory requirements. Results are gathered from all xPUs for saving or post-processing.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ## Visualization: Velocity, Vorticity, and Pressure Fields
