@@ -204,10 +204,7 @@ $$
 on the YZ plane, and similarly for the XZ plane. These conditions prevent the generation of artificial shear forces along the walls.
 
 
-
-
-
-## Numerical Methods and Implementation
+### Numerical Methods and Implementation
 The numerical solution of the incompressible Navier-Stokes equations is performed using Chorin's projection method, an operator-splitting approach. This method separates the velocity update into components corresponding to the physical terms in the equations—viscous, gravitational, convective, and pressure-driven effects. The code integrates multiple numerical strategies, including explicit Euler time-stepping, semi-Lagrangian advection, and a pseudo-transient pressure solver, to ensure efficient and stable computations.
 
 #### Intermediate Velocity Update
