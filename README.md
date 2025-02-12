@@ -113,6 +113,7 @@ julia> include("NavierStokes_3D_Viz.jl")
 
 ### Running Instructions:
 
+#### Using Single xPU's
 To launch the simulation on a single xPU:
 
 1. Run the batch script `./scripts/run_xpu.sh`
@@ -127,8 +128,7 @@ julia> include("NavierStokes_2D_Viz.jl")
 ```
 This will generate 2D frames and an animation for the evolution of each of velocity, vorticity, and pressure in separate directories. 
 
----
-
+#### Using Multiple xPU's
 To launch the simulation on multiple xPU's:
 
 1. Run the batch script `./scripts/run_multixpu.sh`
@@ -318,8 +318,8 @@ The multi-xPU implementation partitions the computational domain across multiple
 
 ## Resources
 - [NavierStokes.jl](https://github.com/utkinis/NavierStokes.jl)
-- [Solving the incompressible
-Navier-Stokes equations in 3-D
-to model gas flow in a room](https://uu.diva-portal.org/smash/get/diva2:1843814/FULLTEXT01.pdf)
-- [NASA - Navier Stokes Equations in 3D](https://www.grc.nasa.gov/www/k-12/airplane/nseqs.html)
+- [Solving the Incompressible
+Navier-Stokes Equations in 3-D
+to Model Gas Flow in a Room](https://uu.diva-portal.org/smash/get/diva2:1843814/FULLTEXT01.pdf)
+- [Navier Stokes Equations in 3D](https://www.grc.nasa.gov/www/k-12/airplane/nseqs.html)
 
