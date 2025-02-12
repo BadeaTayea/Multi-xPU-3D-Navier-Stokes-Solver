@@ -4,6 +4,27 @@
 [![Running Literate.yml](https://github.com/BadeaTayea/Multi-xPU-3D-Navier-Stokes-Solver/actions/workflows/Literate.yml/badge.svg)](https://github.com/BadeaTayea/Multi-xPU-3D-Navier-Stokes-Solver/actions/workflows/Literate.yml)
 [![Enforce Release Tags](https://github.com/BadeaTayea/Multi-xPU-3D-Navier-Stokes-Solver/actions/workflows/Release.yml/badge.svg)](https://github.com/BadeaTayea/Multi-xPU-3D-Navier-Stokes-Solver/actions/workflows/Release.yml)
 
+## Table of Contents
+
+1. [Repository Guide](#repository-guide)  
+2. [Setups](#setups)  
+   - [Computational Setup](#computational-setup)  
+   - [Visualization Setup](#visualization-setup)  
+3. [Running Instructions](#running-instructions)  
+   - [Using Single xPU](#using-single-xpu)  
+   - [Using Multiple xPU](#using-multiple-xpu)  
+4. [Physical Problem](#physical-problem)  
+   - [Governing System of Partial Differential Equations (PDEs)](#governing-system-of-partial-differential-equations-pdes)  
+   - [Boundary Conditions](#boundary-conditions)  
+   - [Numerical Methods and Implementation](#numerical-methods-and-implementation)  
+5. [xPU Computing](#xpu-computing)  
+   - [Single-xPU Implementation](#single-xpu-implementation)  
+   - [Multi-xPU Implementation](#multi-xpu-implementation)  
+6. [Visualization: Velocity, Vorticity, and Pressure Fields](#visualization-velocity-vorticity-and-pressure-fields)  
+   - [Cross-Sectional Evolution in 2D](#cross-sectional-evolution-in-2d)  
+   - [Evolution in 3D](#evolution-in-3d)  
+7. [Resources](#resources)  
+
 
 ## Repository Guide
 
