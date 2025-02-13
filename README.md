@@ -4,6 +4,8 @@
 [![Running Literate.yml](https://github.com/BadeaTayea/Multi-xPU-3D-Navier-Stokes-Solver/actions/workflows/Literate.yml/badge.svg)](https://github.com/BadeaTayea/Multi-xPU-3D-Navier-Stokes-Solver/actions/workflows/Literate.yml)
 [![Enforce Release Tags](https://github.com/BadeaTayea/Multi-xPU-3D-Navier-Stokes-Solver/actions/workflows/Release.yml/badge.svg)](https://github.com/BadeaTayea/Multi-xPU-3D-Navier-Stokes-Solver/actions/workflows/Release.yml)
 
+The project implements a **3D incompressible Navier-Stokes solver** in **Julia** using **ImplicitGlobalGrid.jl** and **ParallelStencil.jl**, enabling **multi-xPU parallelized execution** across distributed GPUs or multi-threaded CPUs. The solver models fluid flow around a spherical obstacle, governed by the incompressible Navier-Stokes equations. The simulation was tested on [**Piz Daint**](https://www.cscs.ch/computers/piz-daint/) multi-xPU nodes at the **Swiss National Supercomputing Centre (CSCS)** as part of the course **"Solving Partial Differential Equations in Parallel on Graphic Processing Units"** at **ETH Zürich**.
+
 The flow of an incompressible fluid around a spherical obstacle is governed by the Navier-Stokes equations, which describe the conservation of momentum and enforce incompressibility:
 
 $$
