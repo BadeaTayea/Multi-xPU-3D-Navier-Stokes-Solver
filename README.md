@@ -22,6 +22,34 @@ where:
 - $\rho$ is the fluid density,
 - $\mu$ is the dynamic viscosity.
 
+
+<table style="width: 100%; table-layout: fixed;">
+  <tr>
+    <td align="center">
+      <img src="docs/2D_Vorticity_Animation.gif" alt="2D Vorticity Animation" width="478.5">
+    </td>
+    <td align="center">
+      <img src="docs/3D_Vorticity_Animation.gif" alt="3D Vorticity Animation" width="400">
+    </td>
+  </tr>
+  <tr>
+    <td align="center" style="background-color: #333; color: white; padding: 10px; border-radius: 5px;">
+      <strong>Fig. 2:</strong> 2D Vorticity Field - Evolution of rotational flow.
+    </td>
+    <td align="center" style="background-color: #333; color: white; padding: 10px; border-radius: 5px;">
+      <strong>Fig. 5:</strong> 3D Vorticity Field - Evolution of rotational flow structures.
+    </td>
+
+  </tr>
+</table>
+
+
+---
+
+
+
+
+
 <table>
   <tr>
     <td align="center">
