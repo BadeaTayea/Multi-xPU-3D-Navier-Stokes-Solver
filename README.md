@@ -29,7 +29,7 @@ where:
       <img src="docs/2D_Vorticity_Animation.gif" alt="2D Vorticity Animation" width="478.5">
     </td>
     <td align="center">
-      <img src="docs/3D_Vorticity_Animation.gif" alt="3D Vorticity Animation" width="400">
+      <img src="docs/3D_Vorticity_Animation.gif" alt="3D Vorticity Animation" width="350">
     </td>
   </tr>
   <tr>
