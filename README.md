@@ -20,6 +20,62 @@ where:
 - $\rho$ is the fluid density,
 - $\mu$ is the dynamic viscosity.
 
+<table>
+  <tr>
+    <td align="center">
+      <strong>Velocity Field</strong><br>
+      <img src="docs/2D_Velocity_Animation.gif" alt="2D Velocity Animation" width="300">
+    </td>
+    <td align="center">
+      <strong>Vorticity Field</strong><br>
+      <img src="docs/2D_Vorticity_Animation.gif" alt="2D Vorticity Animation" width="300">
+    </td>
+    <td align="center">
+      <strong>Pressure Field</strong><br>
+      <img src="docs/2D_Pressure_Animation.gif" alt="2D Pressure Animation" width="300">
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <strong>Fig. 1:</strong> 2D Velocity Field - Evolution of velocity magnitude.
+    </td>
+    <td align="center">
+      <strong>Fig. 2:</strong> 2D Vorticity Field - Evolution of rotational flow.
+    </td>
+    <td align="center">
+      <strong>Fig. 3:</strong> 2D Pressure Field - Evolution of pressure distribution.
+    </td>
+  </tr>
+</table>
+
+
+<table>
+  <tr>
+    <td align="center">
+      <strong>Velocity Field</strong><br>
+      <img src="docs/3D_Velocity_Animation.gif" alt="3D Velocity Animation" width="300">
+    </td>
+    <td align="center">
+      <strong>Vorticity Field</strong><br>
+      <img src="docs/3D_Vorticity_Animation.gif" alt="3D Vorticity Animation" width="300">
+    </td>
+    <td align="center">
+      <strong>Pressure Field</strong><br>
+      <img src="docs/3D_Pressure_Animation.gif" alt="3D Pressure Animation" width="300">
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <strong>Fig. 4:</strong> 3D Velocity Field - Evolution of velocity magnitude.
+    </td>
+    <td align="center">
+      <strong>Fig. 5:</strong> 3D Vorticity Field - Evolution of rotational flow structures.
+    </td>
+    <td align="center">
+      <strong>Fig. 6:</strong> 3D Pressure Field - Evolution of pressure distribution in 3D.
+    </td>
+  </tr>
+</table>
 
 ## Table of Contents
 
@@ -28,8 +84,8 @@ where:
    - [Computational Setup](#computational-setup)  
    - [Visualization Setup](#visualization-setup)  
 3. [Running Instructions](#running-instructions)  
-   - [Using Single xPU](#using-single-xpu)  
-   - [Using Multiple xPU](#using-multiple-xpu)  
+   - [Using Single xPU](#using-single-xpus)  
+   - [Using Multiple xPU](#using-multiple-xpus)  
 4. [Physical Problem](#physical-problem)  
    - [Governing System of Partial Differential Equations (PDEs)](#governing-system-of-partial-differential-equations-pdes)  
    - [Boundary Conditions](#boundary-conditions)  
@@ -294,7 +350,7 @@ The multi-xPU implementation partitions the computational domain across multiple
 
 ## Visualization: Velocity, Vorticity, and Pressure Fields
 
-### Cross-Sectional Evolution in 2D 
+### Cross-Sectional Evolution of Velocity, Vorticity, and Pressure Fields in 2D 
 
 <table>
   <tr>
@@ -324,7 +380,7 @@ The multi-xPU implementation partitions the computational domain across multiple
   </tr>
 </table>
 
-### Evolution in 3D 
+### Evolution of Velocity, Vorticity, and Pressure Fields in 3D 
 
 <table>
   <tr>
