@@ -6,50 +6,6 @@
 
 The project implements a **3D incompressible Navier-Stokes solver** in **Julia** using **ImplicitGlobalGrid.jl** and **ParallelStencil.jl**, enabling **multi-xPU parallelized execution** across distributed GPUs or multi-threaded CPUs. The solver models fluid flow around a spherical obstacle, governed by the incompressible Navier-Stokes equations. The simulation was tested on [**Piz Daint**](https://www.cscs.ch/computers/piz-daint/) multi-xPU nodes at the **Swiss National Supercomputing Centre (CSCS)** as part of the course **"Solving Partial Differential Equations in Parallel on Graphic Processing Units"** at **ETH Zürich**.
 
-The flow of an incompressible fluid around a spherical obstacle is governed by the Navier-Stokes equations, which describe the conservation of momentum and enforce incompressibility:
-
-$$
-\rho \left( \frac{\partial \mathbf{V}}{\partial t} + (\mathbf{V} \cdot \nabla) \mathbf{V} \right) = -\nabla p + \mu \nabla^2 \mathbf{V},
-$$
-
-$$
-\nabla \cdot \mathbf{V} = 0,
-$$
-
-where:
-- $\mathbf{V} = [u, v, w]^T$ is the velocity vector field in the $x$, $y$, and $z$ directions,
-- $p$ is the pressure field,
-- $\rho$ is the fluid density,
-- $\mu$ is the dynamic viscosity.
-
-
-<table style="width: 100%; table-layout: fixed;">
-  <tr>
-    <td align="center">
-      <img src="docs/2D_Vorticity_Animation.gif" alt="2D Vorticity Animation" width="478.5">
-    </td>
-    <td align="center">
-      <img src="docs/3D_Vorticity_Animation.gif" alt="3D Vorticity Animation" width="350">
-    </td>
-  </tr>
-  <tr>
-    <td align="center" style="background-color: #333; color: white; padding: 10px; border-radius: 5px;">
-      <strong>Fig. 2:</strong> 2D Vorticity Field - Evolution of rotational flow.
-    </td>
-    <td align="center" style="background-color: #333; color: white; padding: 10px; border-radius: 5px;">
-      <strong>Fig. 5:</strong> 3D Vorticity Field - Evolution of rotational flow structures.
-    </td>
-
-  </tr>
-</table>
-
-
----
-
-
-
-
-
 <table>
   <tr>
     <td align="center">
@@ -106,6 +62,25 @@ where:
     </td>
   </tr>
 </table>
+
+The flow of an incompressible fluid around a spherical obstacle is governed by the Navier-Stokes equations, which describe the conservation of momentum and enforce incompressibility:
+
+$$
+\rho \left( \frac{\partial \mathbf{V}}{\partial t} + (\mathbf{V} \cdot \nabla) \mathbf{V} \right) = -\nabla p + \mu \nabla^2 \mathbf{V},
+$$
+
+$$
+\nabla \cdot \mathbf{V} = 0,
+$$
+
+where:
+- $\mathbf{V} = [u, v, w]^T$ is the velocity vector field in the $x$, $y$, and $z$ directions,
+- $p$ is the pressure field,
+- $\rho$ is the fluid density,
+- $\mu$ is the dynamic viscosity.
+
+
+
 
 ## Table of Contents
 
