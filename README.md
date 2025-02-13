@@ -26,15 +26,15 @@ where:
   <tr>
     <td align="center">
       <strong>Velocity Field</strong><br>
-      <img src="docs/2D_Velocity_Animation.gif" alt="2D Velocity Animation" width="250">
+      <img src="docs/2D_Velocity_Animation.gif" alt="2D Velocity Animation" width="240">
     </td>
     <td align="center">
       <strong>Vorticity Field</strong><br>
-      <img src="docs/2D_Vorticity_Animation.gif" alt="2D Vorticity Animation" width="250">
+      <img src="docs/2D_Vorticity_Animation.gif" alt="2D Vorticity Animation" width="240">
     </td>
     <td align="center">
       <strong>Pressure Field</strong><br>
-      <img src="docs/2D_Pressure_Animation.gif" alt="2D Pressure Animation" width="250">
+      <img src="docs/2D_Pressure_Animation.gif" alt="2D Pressure Animation" width="240">
     </td>
   </tr>
   <tr>
@@ -55,15 +55,15 @@ where:
   <tr>
     <td align="center">
       <strong>Velocity Field</strong><br>
-      <img src="docs/3D_Velocity_Animation.gif" alt="3D Velocity Animation" width="300">
+      <img src="docs/3D_Velocity_Animation.gif" alt="3D Velocity Animation" width="240">
     </td>
     <td align="center">
       <strong>Vorticity Field</strong><br>
-      <img src="docs/3D_Vorticity_Animation.gif" alt="3D Vorticity Animation" width="300">
+      <img src="docs/3D_Vorticity_Animation.gif" alt="3D Vorticity Animation" width="240">
     </td>
     <td align="center">
       <strong>Pressure Field</strong><br>
-      <img src="docs/3D_Pressure_Animation.gif" alt="3D Pressure Animation" width="300">
+      <img src="docs/3D_Pressure_Animation.gif" alt="3D Pressure Animation" width="240">
     </td>
   </tr>
   <tr>
