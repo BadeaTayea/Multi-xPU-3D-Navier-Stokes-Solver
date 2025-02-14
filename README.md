@@ -350,8 +350,34 @@ The single-xPU implementation runs entirely on a single GPU or a multi-threaded 
 
 ### Multi-xPU Implementation
 
-The multi-xPU implementation partitions the computational domain across multiple xPUs using `ImplicitGlobalGrid`. Each xPU operates on its assigned subdomain, with arrays such as `Vx`, `Vy`, `Vz`, and `Pr` distributed across all processes. Communication between subdomains is handled explicitly using halo updates (`update_halo!`), ensuring continuity at subdomain boundaries. Specific operations, such as enforcing the no-slip boundary condition for the sphere (`set_sphere_multixpu!`), account for the distributed nature of the domain by referencing global coordinates. Functions like `max_g` aggregate data globally, ensuring that results such as residual errors or boundary conditions are synchronized across all processes. `MPI` is used to enable scalability, allowing large domains to be solved efficiently by distributing both the computation and memory requirements. Results are gathered from all xPUs for saving or post-processing.
+The **multi-xPU implementation** distributes the computational domain across multiple xPUs using `ImplicitGlobalGrid`. Each xPU (GPU or CPU thread) operates on a subdomain, with velocity (`Vx`, `Vy`, `Vz`) and pressure (`Pr`) arrays split among processes. To maintain continuity at subdomain interfaces, **halo exchanges** (`update_halo!`) are performed after each computational step. This allows inter-process communication while maintaining local stencil computations.
 
+```julia
+me, dims, nprocs, coords = init_global_grid(nx, ny, nz)
+update_halo!(Vx, Vy, Vz)
+```
+
+Operations like enforcing **no-slip conditions** for the sphere (`set_sphere_multixpu!`) use **global coordinates** to ensure correctness across subdomains. A global reduction operation, `max_g`, aggregates results (e.g., residual errors) across all xPUs to monitor convergence.
+
+```julia
+@parallel function set_sphere_multixpu!(C, Vx, Vy, Vz, ox, oy, oz, lx, ly, lz, dx, dy, dz, r2, nx, ny, nz, coords)
+    xc, yc, zc = (coords[1] * (nx - 2) + (ix - 1)) * dx + dx/2 - lx/2, (coords[2] * (ny - 2) + (iy - 1)) * dy + dy/2 - ly/2, (coords[3] * (nz - 2) + (iz - 1)) * dz + dz/2 - lz/2
+    if (xc - ox)^2 / r2 + (yc - oy)^2 / r2 + (zc - oz)^2 / r2 < 1.0
+        Vx[ix, iy, iz] = 0.0
+        Vy[ix, iy, iz] = 0.0
+        Vz[ix, iy, iz] = 0.0
+    end
+end
+```
+
+Results are **gathered** from all xPUs for post-processing using `gather!`, ensuring that a complete global solution is available for visualization or storage.
+
+```julia
+Pr_inn .= Array(Pr[2:end-1, 2:end-1, 2:end-1]); gather!(Pr_inn, Pr_v)
+Vx_inn .= Array(avx(Vx)[2:end-1, 2:end-1, 2:end-1]); gather!(Vx_inn, Vx_v)
+Vy_inn .= Array(avy(Vy)[2:end-1, 2:end-1, 2:end-1]); gather!(Vy_inn, Vy_v)
+Vz_inn .= Array(avz(Vz)[2:end-1, 2:end-1, 2:end-1]); gather!(Vz_inn, Vz_v)
+```
 
 ## Visualization: Velocity, Vorticity, and Pressure Fields
 
