@@ -79,9 +79,6 @@ where:
 - $\rho$ is the fluid density,
 - $\mu$ is the dynamic viscosity.
 
-
-
-
 ## Table of Contents
 
 1. [Repository Guide](#repository-guide)  
@@ -89,19 +86,27 @@ where:
    - [Computational Setup](#computational-setup)  
    - [Visualization Setup](#visualization-setup)  
 3. [Running Instructions](#running-instructions)  
-   - [Using Single xPU](#using-single-xpus)  
-   - [Using Multiple xPU](#using-multiple-xpus)  
+   - [Using Single xPU](#using-single-xpu)  
+   - [Using Multiple xPU](#using-multiple-xpu)  
 4. [Physical Problem](#physical-problem)  
    - [Governing System of Partial Differential Equations (PDEs)](#governing-system-of-partial-differential-equations-pdes)  
    - [Boundary Conditions](#boundary-conditions)  
-   - [Numerical Methods and Implementation](#numerical-methods-and-implementation)  
-5. [xPU Computing](#xpu-computing)  
+5. [Numerical Methods and Implementation](#numerical-methods-and-implementation)  
+   - [Numerical Methods](#numerical-methods)  
+   - [Spatial Discretization](#spatial-discretization)  
+   - [Time Integration](#time-integration)  
+   - [Convective Term and Semi-Lagrangian Advection](#convective-term-and-semi-lagrangian-advection)  
+   - [Pressure Correction and Incompressibility Enforcement](#pressure-correction-and-incompressibility-enforcement)  
+   - [Boundary Conditions](#boundary-conditions)  
+   - [Stability and Numerical Resolution](#stability-and-numerical-resolution)  
+6. [xPU Computing](#xpu-computing)  
    - [Single-xPU Implementation](#single-xpu-implementation)  
    - [Multi-xPU Implementation](#multi-xpu-implementation)  
-6. [Visualization: Velocity, Vorticity, and Pressure Fields](#visualization-velocity-vorticity-and-pressure-fields)  
+7. [Visualization: Velocity, Vorticity, and Pressure Fields](#visualization-velocity-vorticity-and-pressure-fields)  
    - [Cross-Sectional Evolution in 2D](#cross-sectional-evolution-in-2d)  
    - [Evolution in 3D](#evolution-in-3d)  
-7. [Resources](#resources)  
+8. [Resources](#resources)  
+
 
 
 ## Repository Guide
